@@ -79,7 +79,6 @@ size_t get_type_size(ONNXTensorElementDataType t)
         return 8;
     case ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING:
         throw std::runtime_error("uninplemented string type support");
-        ;
     case ONNX_TENSOR_ELEMENT_DATA_TYPE_BOOL:
         return 1;
     case ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT16:
@@ -115,7 +114,7 @@ int main(int argc, char *argv[])
         std::cerr << "Usage: " << argv[0] << " <onnx_file> [dynamic input dimensions, if any, in order]" << std::endl;
         return EXIT_FAILURE;
     }
-    char *onnf_fname = argv[1];
+    char *onnx_fname = argv[1];
     std::vector<int64_t> dyn_dimensions;
     for (int i = 2; i < argc; i++)
     {
@@ -171,7 +170,7 @@ int main(int argc, char *argv[])
     // Json can be inspected using about:tracing tab in chrome based browsers.
     // session_options.EnableProfiling(argv[0]);
 
-    Ort::Session session{env, onnf_fname, session_options};
+    Ort::Session session{env, onnx_fname, session_options};
 
     Ort::AllocatorWithDefaultOptions allocator;
     // Get names, types and shapes of inputs and outputs.
